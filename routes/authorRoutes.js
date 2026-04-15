@@ -82,5 +82,25 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+router.get("/:authorId/books", async (req, res) => {
+  try {
+    const author = await Author.findByPk(req.params.authorId);
+
+    if (!author) {
+      return res.status(404).json({
+        message: "Author not found"
+      });
+    }
+
+    res.status(200).json({
+      message: "Books route ready"
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message
+    });
+  }
+});
+
 
 module.exports = router;
